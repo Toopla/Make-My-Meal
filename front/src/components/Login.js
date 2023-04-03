@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 
 const Login = (props) => {
     const navigate = useNavigate();
-    const [dataLogin, setDataLogin] = useState({name: '', password: ''});
+    const [dataLogin, setDataLogin] = useState({username: '', password: ''});
 
     const handleName = (e) => {
-        setDataLogin({...dataLogin, name: e.target.value});
+        setDataLogin({...dataLogin, username: e.target.value});
     }
 
     const handlePassword = (e) => {
@@ -16,12 +16,12 @@ const Login = (props) => {
     }
 
     const handleSubmit = (e) => {
-        let name = dataLogin.name;
+        let username = dataLogin.username;
         let password = dataLogin.password;
-        post_login(name, password).then((values) => {
+        post_login(username, password).then((values) => {
             if(values.token !== undefined) {
                 props.setCookie('BearerToken', {
-                    name: name,
+                    name: username,
                     token: values.token
                 }, '/');
                 navigate('/home')
@@ -29,7 +29,7 @@ const Login = (props) => {
                 alert(values);
             }
         })
-        setDataLogin({name: '', password: ''});
+        setDataLogin({username: '', password: ''});
         e.preventDefault();
     }
 
@@ -37,8 +37,8 @@ const Login = (props) => {
         <div style={{marginLeft: 50, marginTop: 20}}>
             <div style={{fontSize: 30}}>Connexion</div>
             <form onSubmit={handleSubmit}>
-                <label style={{marginTop: 10}} htmlFor='name'>Identifiant :</label>
-                <input style={{marginLeft: 10}} type='text' id='name' value={dataLogin.name} onChange={handleName}></input>
+                <label style={{marginTop: 10}} htmlFor='username'>Identifiant :</label>
+                <input style={{marginLeft: 10}} type='text' id='username' value={dataLogin.username} onChange={handleName}></input>
                 <br/>
                 <label style={{marginTop: 10}} htmlFor='password'>Mot de passe :</label>
                 <input style={{marginLeft: 10}} type='password' id='password' value={dataLogin.password} onChange={handlePassword}></input>

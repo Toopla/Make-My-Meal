@@ -14,9 +14,9 @@ export const get_items = async (token) => {
     })
 }
 
-export const post_login = async (name, password) => {
+export const post_login = async (username, password) => {
     return new Promise((resolve, reject) => {
-        axios.post(api_URL + 'login', {name: name, password: password}).then(response => {
+        axios.post(api_URL + 'login', {username: username, password: password}).then(response => {
             let data = response.data;
             resolve(data);
         }).catch(error => {
@@ -25,9 +25,9 @@ export const post_login = async (name, password) => {
     })
 }
 
-export const post_signup = async (name, password) => {
+export const post_signup = async (username, password, firstname, lastname, adresse, mail, photo, role, spec) => {
     return new Promise((resolve, reject) => {
-        axios.post(api_URL + 'signup', {name: name, password: password}).then(response => {
+        axios.post(api_URL + 'signup', {username: username, password: password, firstname: firstname, lastname: lastname, adresse: adresse, mail: mail, photo: photo, role: role, spec: spec}).then(response => {
             let data = response.data;
             resolve(data);
         }).catch(error => {
