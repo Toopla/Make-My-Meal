@@ -99,15 +99,19 @@ const Signup = () => {
                         <input  type='text' id='mail' value={dataSignup.mail} onChange={handleMail} required/>
                     </Col>
                 </Row>
-                <label  htmlFor='photo'>Photo :</label>
-                <input type='text' id='photo' value={dataSignup.photo} onChange={handlePhoto}/>
-                <br/>
-                <label htmlFor='role'>Rôle :</label><br/>
-                <select id='role' value={dataSignup.role} onChange={handleRole} required>
-                    <option value='client'>Client</option>
-                    <option value='chef'>Chef</option>
-                </select>
-                <br/>
+                <Row>
+                    <Col>
+                        <label  htmlFor='photo'>Photo :</label>
+                        <input type='text' id='photo' value={dataSignup.photo} onChange={handlePhoto}/>
+                    </Col>
+                    <Col>
+                        <label htmlFor='role'>Rôle :</label><br/>
+                        <select id='role' value={dataSignup.role} onChange={handleRole} required>
+                            <option value='client'>Client</option>
+                            <option value='chef'>Chef</option>
+                        </select>
+                    </Col>
+                </Row>
                 {dataSignup.role === 'chef' &&
                     <>
                         <label htmlFor='spec'>Spécialité culinaire :</label>
@@ -115,7 +119,7 @@ const Signup = () => {
                         <br/>
                     </>
                 }
-                <Button variant={"outline-light"} type='submit'>Envoyer</Button>
+                <Button variant={"outline-light"} type='submit'>Créer un compte</Button>
                 <Button className={"btn-signup"} style={{color: "white"}} variant={"..."} onClick={() => navigate('/login')}>J'ai déjà un compte</Button>
             </form>
         </div>

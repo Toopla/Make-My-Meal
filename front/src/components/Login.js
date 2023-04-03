@@ -44,7 +44,7 @@ const Login = (props) => {
                 <label htmlFor='password'>Mot de passe :</label><br/>
                 <input type='password' id='password' value={dataLogin.password} onChange={handlePassword}/>
                 <br/>
-                <Button variant={"outline-light"} type='submit'>Envoyer</Button>
+                <Button variant={"outline-light"} type='submit'>Connexion</Button>
                 <Button className={"btn-signup"} style={{color: "white"}} variant={"..."} onClick={() => navigate('/signup')}>Je veux créer un compte</Button>
             </form>
         </div>
