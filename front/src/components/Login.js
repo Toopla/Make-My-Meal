@@ -22,7 +22,8 @@ const Login = (props) => {
             if(values.token !== undefined) {
                 props.setCookie('BearerToken', {
                     name: username,
-                    token: values.token
+                    token: values.token,
+                    role: values.role
                 }, '/');
                 navigate('/home')
             } else {

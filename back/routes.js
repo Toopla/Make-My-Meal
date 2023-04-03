@@ -59,8 +59,9 @@ routes.post('/login', (req, res) => {
 
         const match = await bcrypt.compare(req.body.password, row.user_password);
         if(match) {
+            const role = row.user_role;
             const token = jwt.sign({id: row.user_id}, cfg.jwtSecret, {expiresIn: '1H'});
-            return res.json({token: token}).status(200);
+            return res.json({token: token, role: role}).status(200);
         } else {
             res.json('Le mot de passe est incorrect').status(400);
         }
