@@ -15,7 +15,7 @@ const NavBar = (props) => {
             <img style={{width: 100}} src="images/Make_My_Meal.png" alt="logo"/>
             <Container>
                 <Button style={{color: "white"}} className="item-list" variant="..." onClick={() => navigate('/home')}>Accueil</Button>
-                <Button style={{color: "white"}} className="item-list" variant="..." onClick={() => navigate('/items')}>Items</Button>
+                <Button style={{color: "white"}} className="item-list" variant="..." onClick={() => navigate('/reservation')}>Réservation</Button>
                 {name === undefined ?
                     <Button variant="outline-light" onClick={() => navigate('/login')} >Connexion / Créer compte</Button> : <Button variant="outline-light" onClick={() => { props.removeCookie('BearerToken', '/'); navigate('/home') }}>Déconnexion</Button>
                 }

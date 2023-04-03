@@ -23,17 +23,6 @@ routes.get('/users/chefs', auth.authenticate(), (req, res) => {
     })
 });
 
-
-routes.get('/items', auth.authenticate(), (req, res) => {
-    db.all('SELECT item_id AS id, item_name AS name FROM items', (err, rows) => {
-        if(err) {
-            return res.json(err).status(500);
-        } else {
-            return res.json(rows).status(200);
-        }
-    })
-});
-
 routes.post('/signup', (req, res) => {
     bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
         db.get('INSERT INTO users(user_username, user_password, user_firstname, user_lastname, user_adresse, user_mail, user_photo, user_role, user_spec) VALUES ($username, $password, $firstname, $lastname, $adresse, $mail, $photo, $role, $spec) returning user_id', {
