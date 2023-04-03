@@ -25,9 +25,16 @@ routes.get('/items', auth.authenticate(), (req, res) => {
 
 routes.post('/signup', (req, res) => {
     bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
-        db.get('INSERT INTO users(user_name, user_password) VALUES ($name, $password) returning user_id', {
-            $name: req.body.name,
-            $password: hash
+        db.get('INSERT INTO users(user_username, user_password, user_firstname, user_lastname, user_adresse, user_mail, user_photo, user_role, user_spec) VALUES ($username, $password, $firstname, $lastname, $adresse, $mail, $photo, $role, $spec) returning user_id', {
+            $username: req.body.username,
+            $password: hash,
+            $firstname: req.body.firstname,
+            $lastname: req.body.lastname,
+            $adresse: req.body.adresse,
+            $mail: req.body.mail,
+            $photo: req.body.photo,
+            $role: req.body.role,
+            $spec: req.body.spec
         }, (err, row) => {
             if(err) {
                 return res.json(err).status(500);
@@ -39,8 +46,8 @@ routes.post('/signup', (req, res) => {
 })
 
 routes.post('/login', (req, res) => {
-    db.get('SELECT * FROM users WHERE user_name = $name', {
-        $name: req.body.name
+    db.get('SELECT * FROM users WHERE user_username = $username', {
+        $username: req.body.username
     }, async (err, row) => {
         if(err) {
             return res.json(err).status(500);
@@ -52,8 +59,9 @@ routes.post('/login', (req, res) => {
 
         const match = await bcrypt.compare(req.body.password, row.user_password);
         if(match) {
+            const role = row.user_role;
             const token = jwt.sign({id: row.user_id}, cfg.jwtSecret, {expiresIn: '1H'});
-            return res.json({token: token}).status(200);
+            return res.json({token: token, role: role}).status(200);
         } else {
             res.json('Le mot de passe est incorrect').status(400);
         }
