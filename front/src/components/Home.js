@@ -24,7 +24,19 @@ const Home = (props) => {
 
     if (name === undefined){
         return (
-            <h1 className={'titre-h1 autre-classe'}>no log</h1>
+            <div>
+                <div className={"logo-content"}>
+                    <img className={"logo"} src="images/Make_My_Meal.png" alt="logo"/>
+                </div>
+
+                <div className={"description-content"}>
+                    <p className={"description"}>
+                        Vous pouvez réserver un chef cuisinier pour qu’il vienne cuisiner à domicile en fonction de l’heure du repas (petit déjeuner, déjeuner, goûter, repas)
+                        et choisir le chef qu’il souhaite réserver parmi une liste de chefs.
+                        Quant à lui, le chef pourra accepter ou refuser votre réservation.
+                    </p>
+                </div>
+            </div>
         )
     }else {
         return (
