@@ -25,7 +25,7 @@ const Login = (props) => {
                     token: values.token,
                     role: values.role
                 }, '/');
-                navigate('/home')
+                navigate('/')
             } else {
                 alert(values);
             }

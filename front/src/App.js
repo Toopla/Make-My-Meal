@@ -15,7 +15,7 @@ const App = () => {
         <div className="App">
             <NavBar cookies={cookies} removeCookie={removeCookie}></NavBar>
             <Routes>
-                <Route exact={true} path='/home' element={<Home cookies={cookies}/>}></Route>
+                <Route exact={true} path='/' element={<Home cookies={cookies}/>}></Route>
             </Routes>
             <Routes>
                 <Route exact={true} path='/reservation' element={<Reservation/>}></Route>
