@@ -2,6 +2,19 @@ import axios from 'axios';
 
 let api_URL = 'http://localhost:8000/';
 
+
+export const get_users_chefs = async (token) => {
+    const config = {headers: {Authorization: 'Bearer ' + token}}
+    return new Promise((resolve, reject) => {
+        axios.get(api_URL + 'users/chefs', config).then(response => {
+            let data = response.data;
+            resolve(data);
+        }).catch(error => {
+            reject(error);
+        })
+    })
+}
+
 export const get_items = async (token) => {
     const config = {headers: {Authorization: 'Bearer ' + token}}
     return new Promise((resolve, reject) => {

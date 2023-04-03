@@ -13,6 +13,17 @@ routes.get('/home', (req, res) => {
     return res.json("Bienvenue sur la page d'accueil").status(200);
 });
 
+routes.get('/users/chefs', auth.authenticate(), (req, res) => {
+    db.all('SELECT user_id AS id, user_firstname AS firstname,user_lastname AS lastname,user_adresse AS adresse,user_mail AS mail, user_photo AS photo,user_role AS role, user_spec AS spec FROM users WHERE user_role="chef"', (err, rows) => {
+        if(err) {
+            return res.json(err).status(500);
+        } else {
+            return res.json(rows).status(200);
+        }
+    })
+});
+
+
 routes.get('/items', auth.authenticate(), (req, res) => {
     db.all('SELECT item_id AS id, item_name AS name FROM items', (err, rows) => {
         if(err) {
