@@ -8,7 +8,6 @@ const Home = (props) => {
         if (props.cookies.BearerToken){
             get_users_chefs(props.cookies.BearerToken.token).then((values) => {
                 setDataUsersChefs(values);
-                console.log(values);
             })
         }
     }

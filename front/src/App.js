@@ -4,7 +4,7 @@ import NavBar from './components/NavBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useCookies } from 'react-cookie';
 import Home from './components/Home';
-import Items from './components/Items';
+import Reservation from './components/Reservation';
 import Login from './components/Login';
 import Signup from './components/Signup';
 
@@ -18,7 +18,7 @@ const App = () => {
                 <Route exact={true} path='/home' element={<Home cookies={cookies}/>}></Route>
             </Routes>
             <Routes>
-                <Route exact={true} path='/items' element={<Items cookies={cookies}/>}></Route>
+                <Route exact={true} path='/reservation' element={<Reservation/>}></Route>
             </Routes>
             <Routes>
                 <Route exact={true} path='/signup' element={<Signup/>}></Route>
