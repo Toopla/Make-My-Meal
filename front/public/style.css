@@ -1,0 +1,34 @@
+.App{
+    background-color: #d2b696;
+    height: 100vh;
+}
+
+.logo-content{
+    display: flex;
+    justify-content: center;
+}
+
+.logo{
+    width: 400px;
+}
+
+.bg-navbar{
+    background-color: rgba(183, 126, 104, 0.53);
+}
+
+.item-list:hover{
+    text-decoration: underline;
+    transition: .2s linear;
+}
+
+.description-content{
+    margin: 0 100px 0 100px;
+    padding: 25px;
+    border-radius: 5px;
+    background-color: rgba(183, 126, 104, 0.53);
+    text-align: center;
+}
+
+.description{
+    color: white;
+}
