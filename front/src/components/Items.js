@@ -14,7 +14,7 @@ const Items = (props) => {
 
     useEffect(() => {
         items();
-    }, [dataItems]);
+    }, []);
 
     if(props.cookies.BearerToken) {
         return (
