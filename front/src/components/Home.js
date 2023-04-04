@@ -1,27 +1,27 @@
 import React, {useEffect, useState} from "react";
-import {get_users_chefs} from "../services/api";
+import {get_chefs_liste} from "../services/api";
 
 const Home = (props) => {
-    const [dataUsersChefs,setDataUsersChefs] = useState([]);
+    const [dataChefsListe,setDataChefsListe] = useState([]);
 
-    const usersChefs = () => {
+    const chefsListe = () => {
         if (props.cookies.BearerToken){
-            get_users_chefs(props.cookies.BearerToken.token).then((values) => {
-                setDataUsersChefs(values);
+            get_chefs_liste(props.cookies.BearerToken.token).then((values) => {
+                setDataChefsListe(values);
             })
         }
     }
 
     useEffect(() => {
-        usersChefs();
+        chefsListe();
     }, []);
 
-    let name;
+    let token_verify;
     if(props.cookies.BearerToken) {
-        name = props.cookies.BearerToken.name;
+        token_verify = props.cookies.BearerToken.token;
     }
 
-    if (name === undefined){
+    if (token_verify === undefined){
         return (
             <div>
                 <div className={"logo-content"}>
@@ -42,7 +42,7 @@ const Home = (props) => {
             <div style={{marginLeft: 50, marginTop: 20}}>
                 <div style={{fontSize: 30}}>Liste des chefs</div>
                 <ul>
-                    {dataUsersChefs.map((prop, key) =>{
+                    {dataChefsListe.map((prop, key) =>{
                         return(
                             <li key={key}>{prop.firstname} {prop.lastname} {prop.adresse} {prop.mail} {prop.role} {prop.spec}</li>
                         )
