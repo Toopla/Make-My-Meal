@@ -52,45 +52,71 @@ const Home = (props) => {
 
 
         return (
-            <div style={{ marginLeft: 50, marginTop: 20 }}>
-                <div style={{ fontSize: 30 }}>Liste des chefs</div>
-                <div style={{ marginBottom: 10 }}>
-                    <label htmlFor="category">Catégorie :</label>
-                    <input
-                        type="text"
-                        id="category"
-                        value={searchCategory}
-                        onChange={(e) => setSearchCategory(e.target.value)}
-                    />
+            <div className={"accueil-client"}>
+                <h1>Liste des chefs</h1>
+                <div className={"content-accueil"}>
+                    <div className={"search-bar"}>
+                        <div style={{ marginBottom: 10 }}>
+                            <label htmlFor="name">Nom :</label><br/>
+                            <input
+                                type="text"
+                                id="name"
+                                value={searchName}
+                                onChange={(e) => setSearchName(e.target.value)}
+                            />
+                        </div>
+                        <div style={{ marginBottom: 10 }}>
+                            <label htmlFor="city">Ville :</label><br/>
+                            <input
+                                type="text"
+                                id="city"
+                                value={searchCity}
+                                onChange={(e) => setSearchCity(e.target.value)}
+                            />
+                        </div>
+                        <div style={{ marginBottom: 10 }}>
+                            <label htmlFor="category">Catégorie :</label><br/>
+                            <input
+                                type="text"
+                                id="category"
+                                value={searchCategory}
+                                onChange={(e) => setSearchCategory(e.target.value)}
+                            />
+                        </div>
+                    </div>
+
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Prénom - Nom</th>
+                            <th>Ville</th>
+                            <th>E-mail</th>
+                            <th>Spécialité</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {filteredChefs.map((prop, key) => {
+                            return (
+                                <tr>
+                                    <td key={key}>
+                                        {prop.firstname} {prop.lastname}
+                                    </td>
+                                    <td key={key}>
+                                        {prop.adresse}
+                                    </td>
+                                    <td>
+                                        {prop.mail}
+                                    </td>
+                                    <td>
+                                        {prop.role} {prop.spec}
+                                    </td>
+                                </tr>
+
+                            );
+                        })}
+                        </tbody>
+                    </table>
                 </div>
-                <div style={{ marginBottom: 10 }}>
-                    <label htmlFor="name">Nom :</label>
-                    <input
-                        type="text"
-                        id="name"
-                        value={searchName}
-                        onChange={(e) => setSearchName(e.target.value)}
-                    />
-                </div>
-                <div style={{ marginBottom: 10 }}>
-                    <label htmlFor="city">Ville :</label>
-                    <input
-                        type="text"
-                        id="city"
-                        value={searchCity}
-                        onChange={(e) => setSearchCity(e.target.value)}
-                    />
-                </div>
-                <ul>
-                    {filteredChefs.map((prop, key) => {
-                        return (
-                            <li key={key}>
-                                {prop.firstname} {prop.lastname} {prop.adresse} {prop.mail}{" "}
-                                {prop.role} {prop.spec}
-                            </li>
-                        );
-                    })}
-                    </ul>
             </div>
         );
     }

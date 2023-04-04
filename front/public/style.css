@@ -84,3 +84,56 @@
 .btn-signup:hover{
     text-decoration: underline;
 }
+
+/* Accueil connecté */
+
+.accueil-client .content-accueil{
+    background-color: rgba(183, 126, 104, 0.53);
+    margin: 50px 35px 50px 35px;
+    padding: 15px 0;
+    border-radius: 10px;
+}
+
+.accueil-client h1{
+    margin-top: 30px;
+    text-align: center;
+}
+
+.search-bar{
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+.accueil-client label{
+    font-size: 16pt;
+    color: white;
+}
+
+.accueil-client input{
+    border: none;
+    background-color: rgb(126, 85, 70);
+    color: white;
+    font-size: 14pt;
+    border-radius: 100px;
+    padding: 10px;
+}
+
+.accueil-client table{
+    width: 90%;
+    margin: auto;
+    border: 3px solid rgb(126, 85, 70);
+}
+
+.accueil-client table thead{
+    font-size: 18pt;
+    color: white;
+    text-align: center;
+}
+
+.accueil-client table tbody{
+    font-size: 14pt;
+    color: white;
+    text-align: center;
+}
