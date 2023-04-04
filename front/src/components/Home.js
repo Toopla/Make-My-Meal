@@ -77,12 +77,8 @@ const Home = (props) => {
                                 {prop.role} {prop.spec}
                             </li>
                         );
-                    {dataChefsListe.map((prop, key) =>{
-                        return(
-                            <li key={key}>{prop.firstname} {prop.lastname} {prop.adresse} {prop.mail} {prop.role} {prop.spec}</li>
-                        )
                     })}
-                </ul>
+                    </ul>
             </div>
         );
     }
