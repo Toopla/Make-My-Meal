@@ -1,30 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { get_users_chefs } from "../services/api";
+import React, {useEffect, useState} from "react";
+import {get_chefs_liste} from "../services/api";
 
 const Home = (props) => {
-    const [dataUsersChefs, setDataUsersChefs] = useState([]);
+    const [dataChefsListe,setDataChefsListe] = useState([]);
     const [searchCategory, setSearchCategory] = useState("");
     const [searchName, setSearchName] = useState("");
 
-    const usersChefs = () => {
-        if (props.cookies.BearerToken) {
-            get_users_chefs(props.cookies.BearerToken.token).then((values) => {
-                setDataUsersChefs(values);
-                console.log(values);
-            });
+    const chefsListe = () => {
+        if (props.cookies.BearerToken){
+            get_chefs_liste(props.cookies.BearerToken.token).then((values) => {
+                setDataChefsListe(values);
+            })
         }
     };
 
     useEffect(() => {
-        usersChefs();
+        chefsListe();
     }, []);
 
-    let name;
-    if (props.cookies.BearerToken) {
-        name = props.cookies.BearerToken.name;
+    let token_verify;
+    if(props.cookies.BearerToken) {
+        token_verify = props.cookies.BearerToken.token;
     }
 
-    if (name === undefined) {
+    if (token_verify === undefined){
         return (
             <div>
                 <div className={"logo-content"}>
@@ -41,7 +40,7 @@ const Home = (props) => {
             </div>
         );
     } else {
-        const filteredChefs = dataUsersChefs.filter(
+        const filteredChefs = dataChefsListe.filter(
             (chef) =>
                 chef.spec.toLowerCase().includes(searchCategory.toLowerCase()) &&
                 `${chef.firstname} ${chef.lastname}`
@@ -78,6 +77,10 @@ const Home = (props) => {
                                 {prop.role} {prop.spec}
                             </li>
                         );
+                    {dataChefsListe.map((prop, key) =>{
+                        return(
+                            <li key={key}>{prop.firstname} {prop.lastname} {prop.adresse} {prop.mail} {prop.role} {prop.spec}</li>
+                        )
                     })}
                 </ul>
             </div>

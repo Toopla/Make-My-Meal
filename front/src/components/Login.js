@@ -21,11 +21,11 @@ const Login = (props) => {
         post_login(username, password).then((values) => {
             if(values.token !== undefined) {
                 props.setCookie('BearerToken', {
-                    name: username,
                     token: values.token,
+                    id_utilisateur: values.id,
                     role: values.role
                 }, '/');
-                navigate('/home')
+                navigate('/')
             } else {
                 alert(values);
             }
@@ -35,18 +35,18 @@ const Login = (props) => {
     }
 
     return (
-        <div style={{marginLeft: 50, marginTop: 20}}>
-            <div style={{fontSize: 30}}>Connexion</div>
+        <div className="login-container">
             <form onSubmit={handleSubmit}>
-                <label style={{marginTop: 10}} htmlFor='username'>Identifiant :</label>
-                <input style={{marginLeft: 10}} type='text' id='username' value={dataLogin.username} onChange={handleName}></input>
+                <h1>Connexion</h1>
+                <label htmlFor='username'>Identifiant :</label><br/>
+                <input type='text' id='username' value={dataLogin.username} onChange={handleName}/>
                 <br/>
-                <label style={{marginTop: 10}} htmlFor='password'>Mot de passe :</label>
-                <input style={{marginLeft: 10}} type='password' id='password' value={dataLogin.password} onChange={handlePassword}></input>
+                <label htmlFor='password'>Mot de passe :</label><br/>
+                <input type='password' id='password' value={dataLogin.password} onChange={handlePassword}/>
                 <br/>
-                <Button style={{marginTop: 10}} type='submit'>Envoyer</Button>
+                <Button variant={"outline-light"} type='submit'>Connexion</Button>
+                <Button className={"btn-signup"} style={{color: "white"}} variant={"..."} onClick={() => navigate('/signup')}>Je veux créer un compte</Button>
             </form>
-            <Button style={{marginTop: 20}} onClick={() => navigate('/signup')}>Je veux créer un compte</Button>
         </div>
     )
 }

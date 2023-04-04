@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { post_signup } from '../services/api';
-import { Button } from 'react-bootstrap';
+import {Button, Col, Row} from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
     const navigate = useNavigate();
-    const [dataSignup, setDataSignup] = useState({username: '', password: '', firstname: '', lastname: '', adresse: '', mail: '', photo: '', role: '', spec: ''});
+    const [dataSignup, setDataSignup] = useState({username: '', password: '', firstname: '', lastname: '', adresse: '', mail: '', photo: '', role: 'client', spec: ''});
 
     const handleName = (e) => {
         setDataSignup({...dataSignup, username: e.target.value});
@@ -56,9 +56,9 @@ const Signup = () => {
         let spec = dataSignup.spec;
         if(username.length !== 0 && password.length !== 0 && firstname.length !== 0 && lastname.length !== 0 && adresse.length !== 0 && mail.length !== 0 && role.length !== 0) {
             post_signup(username, password, firstname, lastname, adresse, mail, photo, role, spec).then((values) => {
-                navigate('/login');
-            })
-            setDataSignup({username: '', password: '', firstname: '', lastname: '', adresse: '', mail: '', photo: '', role: '', spec: ''});
+                setDataSignup({username: '', password: '', firstname: '', lastname: '', adresse: '', mail: '', photo: '', role: 'client', spec: ''});
+            });
+            navigate('/login');
         } else {
             alert('Certains champs sont vides');
         }
@@ -66,46 +66,62 @@ const Signup = () => {
     }
 
     return (
-        <div style={{marginLeft: 50, marginTop: 20}}>
-            <div style={{fontSize: 30}}>Inscription</div>
+        <div className={"login-container"}>
             <form onSubmit={handleSubmit}>
-                <label style={{marginTop: 10}} htmlFor='username'>Identifiant :</label>
-                <input style={{marginLeft: 10}} type='text' id='username' value={dataSignup.username} onChange={handleName} required></input>
-                <br/>
-                <label style={{marginTop: 10}} htmlFor='password'>Mot de passe :</label>
-                <input style={{marginLeft: 10}} type='password' id='password' value={dataSignup.password} onChange={handlePassword} required></input>
-                <br/>
-                <label style={{marginTop: 10}} htmlFor='firstname'>Prénom :</label>
-                <input style={{marginLeft: 10}} type='text' id='firstname' value={dataSignup.firstname} onChange={handleFirstname} required></input>
-                <br/>
-                <label style={{marginTop: 10}} htmlFor='lastname'>Nom :</label>
-                <input style={{marginLeft: 10}} type='text' id='lastname' value={dataSignup.lastname} onChange={handleLastname} required></input>
-                <br/>
-                <label style={{marginTop: 10}} htmlFor='adresse'>Ville :</label>
-                <input style={{marginLeft: 10}} type='text' id='adresse' value={dataSignup.adresse} onChange={handleAdresse} required></input>
-                <br/>
-                <label style={{marginTop: 10}} htmlFor='mail'>Email :</label>
-                <input style={{marginLeft: 10}} type='text' id='mail' value={dataSignup.mail} onChange={handleMail} required></input>
-                <br/>
-                <label style={{marginTop: 10}} htmlFor='photo'>Photo :</label>
-                <input style={{marginLeft: 10}} type='text' id='photo' value={dataSignup.photo} onChange={handlePhoto}></input>
-                <br/>
-                <label style={{marginTop: 10}} htmlFor='role'>Rôle :</label>
-                <select style={{marginLeft: 10}} id='role' value={dataSignup.role} onChange={handleRole} required>
-                    <option value='client'>Client</option>
-                    <option value='chef'>Chef</option>
-                </select>
-                <br/>
-                {dataSignup.role === 'chef' && 
+                <h1>Inscription</h1>
+                <Row>
+                    <Col>
+                        <label htmlFor='username'>Identifiant :</label>
+                        <input type='text' id='username' value={dataSignup.username} onChange={handleName} required/>
+                    </Col>
+                    <Col>
+                        <label htmlFor='password'>Mot de passe :</label>
+                        <input type='password' id='password' value={dataSignup.password} onChange={handlePassword} required/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <label htmlFor='firstname'>Prénom :</label>
+                        <input type='text' id='firstname' value={dataSignup.firstname} onChange={handleFirstname} required/>
+                    </Col>
+                    <Col>
+                        <label  htmlFor='lastname'>Nom :</label>
+                        <input  type='text' id='lastname' value={dataSignup.lastname} onChange={handleLastname} required/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <label  htmlFor='adresse'>Ville :</label>
+                        <input  type='text' id='adresse' value={dataSignup.adresse} onChange={handleAdresse} required/>
+                    </Col>
+                    <Col>
+                        <label  htmlFor='mail'>Email :</label>
+                        <input  type='text' id='mail' value={dataSignup.mail} onChange={handleMail} required/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <label  htmlFor='photo'>Photo :</label>
+                        <input type='text' id='photo' value={dataSignup.photo} onChange={handlePhoto}/>
+                    </Col>
+                    <Col>
+                        <label htmlFor='role'>Rôle :</label><br/>
+                        <select id='role' value={dataSignup.role} onChange={handleRole} required>
+                            <option value='client'>Client</option>
+                            <option value='chef'>Chef</option>
+                        </select>
+                    </Col>
+                </Row>
+                {dataSignup.role === 'chef' &&
                     <>
-                        <label style={{marginTop: 10}} htmlFor='spec'>Spécialité culinaire :</label>
-                        <input style={{marginLeft: 10}} type='text' id='spec' value={dataSignup.spec} onChange={handleSpec}></input>
+                        <label htmlFor='spec'>Spécialité culinaire :</label>
+                        <input type='text' id='spec' value={dataSignup.spec} onChange={handleSpec}/>
                         <br/>
                     </>
                 }
-                <Button style={{marginTop: 10}} type='submit'>Envoyer</Button>
+                <Button variant={"outline-light"} type='submit'>Créer un compte</Button>
+                <Button className={"btn-signup"} style={{color: "white"}} variant={"..."} onClick={() => navigate('/login')}>J'ai déjà un compte</Button>
             </form>
-            <Button style={{marginTop: 20}} onClick={() => navigate('/login')}>J'ai déjà un compte</Button>
         </div>
     )
 }

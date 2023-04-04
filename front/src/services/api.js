@@ -2,11 +2,10 @@ import axios from 'axios';
 
 let api_URL = 'http://localhost:8000/';
 
-
-export const get_users_chefs = async (token) => {
+export const get_user = async (token, id) => {
     const config = {headers: {Authorization: 'Bearer ' + token}}
     return new Promise((resolve, reject) => {
-        axios.get(api_URL + 'users/chefs', config).then(response => {
+        axios.get(api_URL + 'users/' + id, config).then(response => {
             let data = response.data;
             resolve(data);
         }).catch(error => {
@@ -15,10 +14,10 @@ export const get_users_chefs = async (token) => {
     })
 }
 
-export const get_items = async (token) => {
+export const get_chefs_liste = async (token) => {
     const config = {headers: {Authorization: 'Bearer ' + token}}
     return new Promise((resolve, reject) => {
-        axios.get(api_URL + 'items', config).then(response => {
+        axios.get(api_URL + 'chefs/liste', config).then(response => {
             let data = response.data;
             resolve(data);
         }).catch(error => {
