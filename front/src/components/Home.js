@@ -3,6 +3,8 @@ import {get_chefs_liste} from "../services/api";
 
 const Home = (props) => {
     const [dataChefsListe,setDataChefsListe] = useState([]);
+    const [searchCategory, setSearchCategory] = useState("");
+    const [searchName, setSearchName] = useState("");
 
     const chefsListe = () => {
         if (props.cookies.BearerToken){
@@ -10,7 +12,7 @@ const Home = (props) => {
                 setDataChefsListe(values);
             })
         }
-    }
+    };
 
     useEffect(() => {
         chefsListe();
@@ -25,7 +27,7 @@ const Home = (props) => {
         return (
             <div>
                 <div className={"logo-content"}>
-                    <img className={"logo"} src="images/Make_My_Meal.png" alt="logo"/>
+                    <img className={"logo"} src="images/Make_My_Meal.png" alt="logo" />
                 </div>
 
                 <div className={"description-content"}>
@@ -36,12 +38,45 @@ const Home = (props) => {
                     </p>
                 </div>
             </div>
-        )
-    }else {
+        );
+    } else {
+        const filteredChefs = dataChefsListe.filter(
+            (chef) =>
+                chef.spec.toLowerCase().includes(searchCategory.toLowerCase()) &&
+                `${chef.firstname} ${chef.lastname}`
+                    .toLowerCase()
+                    .includes(searchName.toLowerCase())
+        );
+
         return (
-            <div style={{marginLeft: 50, marginTop: 20}}>
-                <div style={{fontSize: 30}}>Liste des chefs</div>
+            <div style={{ marginLeft: 50, marginTop: 20 }}>
+                <div style={{ fontSize: 30 }}>Liste des chefs</div>
+                <div style={{ marginBottom: 10 }}>
+                    <label htmlFor="category">Catégorie :</label>
+                    <input
+                        type="text"
+                        id="category"
+                        value={searchCategory}
+                        onChange={(e) => setSearchCategory(e.target.value)}
+                    />
+                </div>
+                <div style={{ marginBottom: 10 }}>
+                    <label htmlFor="name">Nom :</label>
+                    <input
+                        type="text"
+                        id="name"
+                        value={searchName}
+                        onChange={(e) => setSearchName(e.target.value)}
+                    />
+                </div>
                 <ul>
+                    {filteredChefs.map((prop, key) => {
+                        return (
+                            <li key={key}>
+                                {prop.firstname} {prop.lastname} {prop.adresse} {prop.mail}{" "}
+                                {prop.role} {prop.spec}
+                            </li>
+                        );
                     {dataChefsListe.map((prop, key) =>{
                         return(
                             <li key={key}>{prop.firstname} {prop.lastname} {prop.adresse} {prop.mail} {prop.role} {prop.spec}</li>
@@ -49,8 +84,8 @@ const Home = (props) => {
                     })}
                 </ul>
             </div>
-        )
+        );
     }
-}
+};
 
 export default Home;
