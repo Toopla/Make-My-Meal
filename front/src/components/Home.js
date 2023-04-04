@@ -5,6 +5,7 @@ const Home = (props) => {
     const [dataChefsListe,setDataChefsListe] = useState([]);
     const [searchCategory, setSearchCategory] = useState("");
     const [searchName, setSearchName] = useState("");
+    const [searchCity, setSearchCity] = useState("");
 
     const chefsListe = () => {
         if (props.cookies.BearerToken){
@@ -45,8 +46,10 @@ const Home = (props) => {
                 chef.spec.toLowerCase().includes(searchCategory.toLowerCase()) &&
                 `${chef.firstname} ${chef.lastname}`
                     .toLowerCase()
-                    .includes(searchName.toLowerCase())
-        );
+                    .includes(searchName.toLowerCase()) &&
+                    chef.adresse.toLowerCase().includes(searchCity.toLowerCase())
+        )
+
 
         return (
             <div style={{ marginLeft: 50, marginTop: 20 }}>
@@ -67,6 +70,15 @@ const Home = (props) => {
                         id="name"
                         value={searchName}
                         onChange={(e) => setSearchName(e.target.value)}
+                    />
+                </div>
+                <div style={{ marginBottom: 10 }}>
+                    <label htmlFor="city">Ville :</label>
+                    <input
+                        type="text"
+                        id="city"
+                        value={searchCity}
+                        onChange={(e) => setSearchCity(e.target.value)}
                     />
                 </div>
                 <ul>
