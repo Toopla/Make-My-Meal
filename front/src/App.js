@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Reservation from './components/Reservation';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import Planning from './components/Planning';
 
 const App = () => {
     const [cookies, setCookie, removeCookie] = useCookies(['BearerToken']);
@@ -19,6 +20,9 @@ const App = () => {
             </Routes>
             <Routes>
                 <Route exact={true} path='/reservation' element={<Reservation/>}></Route>
+            </Routes>
+            <Routes>
+                <Route exact={true} path='/planning' element={<Planning/>}></Route>
             </Routes>
             <Routes>
                 <Route exact={true} path='/signup' element={<Signup/>}></Route>
