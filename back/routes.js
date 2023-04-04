@@ -23,6 +23,27 @@ routes.get('/users/:id', auth.authenticate(), (req, res) => {
     })
 })
 
+routes.put('/users/:id', auth.authenticate(), (req, res) => {
+    db.run('UPDATE users SET user_username = $username, user_password = $password, user_firstname = $firstname, user_lastname = $lastname, user_adresse = $adresse, user_mail = $mail, user_photo = $photo, user_role = $role, user_spec = $spec WHERE user_id = $id', {
+        $username: req.body.username,
+        $password: req.body.password,
+        $firstname: req.body.firstname,
+        $lastname: req.body.lastname,
+        $adresse: req.body.adresse,
+        $mail: req.body.mail,
+        $photo: req.body.photo,
+        $role: req.body.photo,
+        $spec: req.body.spec,
+        $id: req.params.id
+    }, (err) => {
+        if(err) {
+            return res.json(err).status(500);
+        } else {
+            return res.status(200);
+        }
+    })
+})
+
 routes.get('/chefs/liste', auth.authenticate(), (req, res) => {
     db.all('SELECT user_id AS id, user_firstname AS firstname, user_lastname AS lastname, user_adresse AS adresse, user_mail AS mail, user_photo AS photo, user_role AS role, user_spec AS spec FROM users WHERE user_role="chef"', (err, rows) => {
         if(err) {

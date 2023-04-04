@@ -14,6 +14,18 @@ export const get_user = async (token, id) => {
     })
 }
 
+export const put_user = async (token, id) => {
+    const config = {headers: {Authorization: 'Bearer ' + token}}
+    return new Promise((resolve, reject) => {
+        axios.put(api_URL + 'users/' + id, config).then(response => {
+            let data = response.data;
+            resolve(data);
+        }).catch(error => {
+            reject(error);
+        })
+    })
+}
+
 export const get_chefs_liste = async (token) => {
     const config = {headers: {Authorization: 'Bearer ' + token}}
     return new Promise((resolve, reject) => {
