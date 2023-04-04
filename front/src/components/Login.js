@@ -21,8 +21,8 @@ const Login = (props) => {
         post_login(username, password).then((values) => {
             if(values.token !== undefined) {
                 props.setCookie('BearerToken', {
-                    name: username,
                     token: values.token,
+                    id_utilisateur: values.id,
                     role: values.role
                 }, '/');
                 navigate('/')
