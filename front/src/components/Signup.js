@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
     const navigate = useNavigate();
-    const [dataSignup, setDataSignup] = useState({username: '', password: '', firstname: '', lastname: '', adresse: '', mail: '', photo: '', role: '', spec: ''});
+    const [dataSignup, setDataSignup] = useState({username: '', password: '', firstname: '', lastname: '', adresse: '', mail: '', photo: '', role: 'client', spec: ''});
 
     const handleName = (e) => {
         setDataSignup({...dataSignup, username: e.target.value});
@@ -56,9 +56,9 @@ const Signup = () => {
         let spec = dataSignup.spec;
         if(username.length !== 0 && password.length !== 0 && firstname.length !== 0 && lastname.length !== 0 && adresse.length !== 0 && mail.length !== 0 && role.length !== 0) {
             post_signup(username, password, firstname, lastname, adresse, mail, photo, role, spec).then((values) => {
-                navigate('/login');
-            })
-            setDataSignup({username: '', password: '', firstname: '', lastname: '', adresse: '', mail: '', photo: '', role: '', spec: ''});
+                setDataSignup({username: '', password: '', firstname: '', lastname: '', adresse: '', mail: '', photo: '', role: 'client', spec: ''});
+            });
+            navigate('/login');
         } else {
             alert('Certains champs sont vides');
         }

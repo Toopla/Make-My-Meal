@@ -23,7 +23,7 @@ routes.get('/users/:id', auth.authenticate(), (req, res) => {
     })
 })
 
-routes.get('/chefs/liste', auth.authenticate(), (req, res) => {
+routes.get('/users/chefs', auth.authenticate(), (req, res) => {
     db.all('SELECT user_id AS id, user_firstname AS firstname, user_lastname AS lastname, user_adresse AS adresse, user_mail AS mail, user_photo AS photo, user_role AS role, user_spec AS spec FROM users WHERE user_role="chef"', (err, rows) => {
         if(err) {
             return res.json(err).status(500);
