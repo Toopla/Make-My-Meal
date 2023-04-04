@@ -13,16 +13,6 @@ routes.get('/home', (req, res) => {
     return res.json("Bienvenue sur la page d'accueil").status(200);
 });
 
-routes.get('/users/:id', auth.authenticate(), (req, res) => {
-    db.get('SELECT user_id AS id, user_username AS username, user_password AS password, user_firstname AS firstname, user_lastname AS lastname, user_adresse AS adresse, user_mail AS mail, user_photo AS photo, user_role AS role, user_spec AS spec FROM users WHERE user_id=$id', {$id: req.params.id}, (err, row) => {
-        if (err){
-            return res.json(err).status(500);
-        }else {
-            return res.json(row).status(200);
-        }
-    })
-})
-
 routes.get('/users/chefs', auth.authenticate(), (req, res) => {
     db.all('SELECT user_id AS id, user_firstname AS firstname, user_lastname AS lastname, user_adresse AS adresse, user_mail AS mail, user_photo AS photo, user_role AS role, user_spec AS spec FROM users WHERE user_role="chef"', (err, rows) => {
         if(err) {
@@ -69,10 +59,9 @@ routes.post('/login', (req, res) => {
 
         const match = await bcrypt.compare(req.body.password, row.user_password);
         if(match) {
-            const id = row.user_id;
             const role = row.user_role;
             const token = jwt.sign({id: row.user_id}, cfg.jwtSecret, {expiresIn: '1H'});
-            return res.json({token: token, id: id, role: role}).status(200);
+            return res.json({token: token, role: role}).status(200);
         } else {
             res.json('Le mot de passe est incorrect').status(400);
         }
