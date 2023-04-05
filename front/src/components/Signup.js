@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
     const navigate = useNavigate();
-    const [dataSignup, setDataSignup] = useState({username: '', password: '', firstname: '', lastname: '', adresse: '', mail: '', photo: 'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Image.png', role: 'client', spec: ''});
+    const [dataSignup, setDataSignup] = useState({username: '', password: '', firstname: '', lastname: '', adresse: '', mail: '', photo: '', role: 'client', spec: ''});
 
     const handleName = (e) => {
         setDataSignup({...dataSignup, username: e.target.value});
@@ -50,7 +50,12 @@ const Signup = () => {
         let lastname = dataSignup.lastname;
         let adresse = dataSignup.adresse;
         let mail = dataSignup.mail;
-        let photo = dataSignup.photo;
+        let photo = '';
+        if((dataSignup.photo).length === 0) {
+            photo = 'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Image.png';
+        } else {
+            photo = dataSignup.photo;
+        }
         let role = dataSignup.role;
         let spec = dataSignup.spec;
         if(username.length !== 0 && password.length !== 0 && firstname.length !== 0 && lastname.length !== 0 && adresse.length !== 0 && mail.length !== 0 && role.length !== 0) {
