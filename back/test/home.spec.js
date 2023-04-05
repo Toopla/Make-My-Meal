@@ -1,19 +1,19 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const express = require("express");
-const app = express();
-const router = require('../routes.js')
 
 const expect = chai.expect;
 chai.use(chaiHttp);
 
-app.use('/', router);
 
 describe('POST /login', () => {
     it('devrait retourner un token JWT valide si les informations d\'identification sont correctes', (done) => {
-
-        chai.request(app)
-            .post('/login',{username:'enzo_blois',password:'123'})
+        const user = {
+            username: 'tom_cuvelier',
+            password: '123'
+        };
+        chai.request("localhost:8000")
+            .post('/login')
+            .send(user)
             .end((err, res) => {
                 expect(err).to.be.null;
                 expect(res).to.have.status(200);
@@ -30,8 +30,9 @@ describe('POST /login', () => {
             password: 'testpassword'
         };
 
-        chai.request(app)
-            .post('/login',{username:'wrongusername',password:'123'})
+        chai.request("localhost:8000")
+            .post('/login')
+            .send(user)
             .end((err, res) => {
                 expect(err).to.be.null;
                 expect(res).to.have.status(400);
@@ -47,7 +48,7 @@ describe('POST /login', () => {
             password: 'wrongpassword'
         };
 
-        chai.request(app)
+        chai.request("localhost:8000")
             .post('/login')
             .send(user)
             .end((err, res) => {
