@@ -100,11 +100,11 @@ routes.post('/login', (req, res) => {
         $username: req.body.username
     }, async (err, row) => {
         if(err) {
-            return res.json(err).status(500);
+            return res.status(200).json(err);
         }
 
         if(!row) {
-            return res.json("Le compte n'existe pas").status(400);
+            return res.status(400).json("Le compte n'existe pas");
         }
 
         const match = await bcrypt.compare(req.body.password, row.user_password);
@@ -114,7 +114,7 @@ routes.post('/login', (req, res) => {
             const token = jwt.sign({id: row.user_id}, cfg.jwtSecret, {expiresIn: '1H'});
             return res.json({token: token, id: id, role: role}).status(200);
         } else {
-            res.json('Le mot de passe est incorrect').status(400);
+            res.status(400).json('Le mot de passe est incorrect');
         }
     })
 })
