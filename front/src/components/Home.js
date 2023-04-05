@@ -85,6 +85,7 @@ const Home = (props) => {
                     {filteredChefs.map((prop, key) => {
                         return (
                             <li key={key}>
+                                <img src={prop.photo} alt={"Photo profil"}/>
                                 {prop.firstname} {prop.lastname} {prop.adresse} {prop.mail}{" "}
                                 {prop.role} {prop.spec}
                             </li>
