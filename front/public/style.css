@@ -137,3 +137,9 @@
     color: white;
     text-align: center;
 }
+
+.accueil-client table tr,
+.accueil-client table th,
+.accueil-client table td{
+    border: 2px solid rgb(126, 85, 70);
+}
