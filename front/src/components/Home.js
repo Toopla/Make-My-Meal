@@ -99,6 +99,7 @@ const Home = (props) => {
                             return (
                                 <tr>
                                     <td key={key}>
+                                    <img src={prop.photo} alt={"Photo profil"}/>
                                         {prop.firstname} {prop.lastname}
                                     </td>
                                     <td key={key}>
