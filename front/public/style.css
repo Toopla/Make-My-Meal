@@ -145,8 +145,10 @@
 }
 
 .accueil-client table img{
-    width: 100px;
-    border-radius: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    width: 80px;
+    height: 80px;
     margin-right: 10px;
 }
 
