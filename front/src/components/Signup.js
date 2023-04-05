@@ -36,7 +36,6 @@ const Signup = () => {
     }
 
     const handleRole = (e) => {
-        console.log(e.target.value);
         setDataSignup({...dataSignup, role: e.target.value});
     }
 
