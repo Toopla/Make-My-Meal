@@ -1,11 +1,21 @@
 import React, {useEffect, useState} from "react";
-import {get_chefs_liste} from "../services/api";
+import {get_chefs_liste, get_user} from "../services/api";
+import {Button} from "react-bootstrap";
 
 const Home = (props) => {
     const [dataChefsListe,setDataChefsListe] = useState([]);
     const [searchCategory, setSearchCategory] = useState("");
     const [searchName, setSearchName] = useState("");
     const [searchCity, setSearchCity] = useState("");
+    const [dataClient, setDataClient] = useState([]);
+
+    const clientListe = () =>{
+        if (props.cookies.BearerToken){
+            get_user(props.cookies.BearerToken.token).then((values) => {
+                setDataClient(values);
+            })
+        }
+    };
 
     const chefsListe = () => {
         if (props.cookies.BearerToken){
@@ -116,6 +126,22 @@ const Home = (props) => {
                         })}
                         </tbody>
                     </table>
+
+                    <ul>
+                        {dataClient.map((prop, key) => {
+                            <li key={key}>{prop.date}</li>
+                            <li key={key}>{prop.creneau}</li>
+                            <li key={key}>{prop.accepter}</li>
+                            <li key={key}>{prop.refuser}</li>
+                            <li key={key}>{prop.photo}</li>
+                            <li key={key}>{prop.adresse}</li>
+                            <li key={key}>{prop.mail}</li>
+                            <li key={key}>{prop.firstname}</li>
+                            <li key={key}>{prop.lastname}</li>
+                        })}
+                    </ul>
+
+                    <Button variant={"outline-light"}>Valider</Button>
                 </div>
             </div>
         );
