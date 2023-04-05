@@ -143,3 +143,7 @@
 .accueil-client table td{
     border: 2px solid rgb(126, 85, 70);
 }
+
+.accueil-client table img{
+    width: 100px;
+}
