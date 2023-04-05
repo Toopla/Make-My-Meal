@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../NavBar';
 
@@ -10,6 +10,8 @@ jest.mock('react-router-dom', () => ({
 describe('NavBar', () => {
     let props;
     let navigate;
+    const cookies = {};
+    const removeCookie = jest.fn();
 
     beforeEach(() => {
         props = {
@@ -29,14 +31,9 @@ describe('NavBar', () => {
     it('navigates to Home on click', () => {
         const { getByText } = render(<NavBar {...props} />);
         fireEvent.click(getByText('Accueil'));
-        expect(navigate).toHaveBeenCalledWith('/home');
+        expect(navigate).toHaveBeenCalledWith('/');
     });
 
-    it('navigates to Items on click', () => {
-        const { getByText } = render(<NavBar {...props} />);
-        fireEvent.click(getByText('Items'));
-        expect(navigate).toHaveBeenCalledWith('/items');
-    });
 
     it('navigates to Login on click when no user is logged in', () => {
         const { getByText } = render(<NavBar {...props} />);
@@ -44,13 +41,20 @@ describe('NavBar', () => {
         expect(navigate).toHaveBeenCalledWith('/login');
     });
 
-    it('navigates to Home and removes cookies on click when a user is logged in', () => {
-        props.cookies.BearerToken = { name: 'John Doe' };
+    it('navigates to Login on click when no user is logged in', () => {
         const { getByText } = render(<NavBar {...props} />);
-        fireEvent.click(getByText('Déconnexion'));
-        expect(navigate).toHaveBeenCalledWith('/home');
-        expect(props.removeCookie).toHaveBeenCalledWith('BearerToken', '/');
+        fireEvent.click(getByText('Profil'));
+        expect(navigate).toHaveBeenCalledWith('/profil');
     });
+
+    it('navigates to Login on click when no user is logged in', () => {
+        const { getByText } = render(<NavBar {...props} />);
+        fireEvent.click(getByText('Planning'));
+        expect(navigate).toHaveBeenCalledWith('/planning');
+    });
+
+
+
 });
 
 /*
