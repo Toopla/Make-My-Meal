@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { get_planning, post_planning, put_planning } from "../services/api";
-import {Button} from 'react-bootstrap';
+import {Button, Col, Row} from 'react-bootstrap';
 import moment from 'moment';
+import '../assets/styles/Calendar.css';
 
 const Planning = (props) => {
     const [dataPostPlanning, setDataPostPlanning] = useState({jour: new Date(), petit_dejeuner: false, dejeuner: false, gouter: false, repas: false});
@@ -64,24 +65,39 @@ const Planning = (props) => {
     }, [])
 
     return (
-        <div style={{marginLeft: 50, marginTop: 20}}>
-            <Calendar onChange={handleJour} value={dataPostPlanning.jour}/>
-            <span className='bold'>Date selectionnée: {(dataPostPlanning.jour).toLocaleDateString()}</span>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor='petit-dejeuner'>Petit déjeuner (7h - 10h) :</label>
-                <input type='checkbox' id='petit-dejeuner' value={dataPostPlanning.petit_dejeuner} onChange={handlePetitDejeuner} checked={dataPostPlanning.petit_dejeuner}/>
-                <br/>
-                <label htmlFor='dejeuner'>Déjeuner (11h - 14h) :</label>
-                <input type='checkbox' id='dejeuner' value={dataPostPlanning.dejeuner} onChange={handleDejeuner} checked={dataPostPlanning.dejeuner}/>
-                <br/>
-                <label htmlFor='gouter'>Gouter (15h - 17h) :</label>
-                <input type='checkbox' id='gouter' value={dataPostPlanning.gouter} onChange={handleGouter} checked={dataPostPlanning.gouter}/>
-                <br/>
-                <label htmlFor='repas'>Repas (18h - 22h) :</label>
-                <input type='checkbox' id='repas' value={dataPostPlanning.repas} onChange={handleRepas} checked={dataPostPlanning.repas}/>
-                <br/>
-                <Button variant={"outline-light"} type='submit'>Valider</Button>
-            </form>
+        <div className={"planning-chef"} style={{marginLeft: 50, marginTop: 20}}>
+            <h1>Planning</h1>
+            <div className={"planning-content"}>
+                <Calendar onChange={handleJour} value={dataPostPlanning.jour}/>
+                <div className={"planning-content-form"}>
+                    <span className='bold'>Date selectionnée: {(dataPostPlanning.jour).toLocaleDateString()}</span>
+                    <form onSubmit={handleSubmit}>
+                        <Row className={"row"}>
+                            <Col>
+                                <div className={"btn-form"}>
+                                    <label htmlFor='petit-dejeuner'>Petit déjeuner (7h - 10h) :</label>
+                                    <input type='checkbox' id='petit-dejeuner' value={dataPostPlanning.petit_dejeuner} onChange={handlePetitDejeuner} checked={dataPostPlanning.petit_dejeuner}/>
+                                </div>
+                                <div className={"btn-form"}>
+                                    <label htmlFor='dejeuner'>Déjeuner (11h - 14h) :</label>
+                                    <input type='checkbox' id='dejeuner' value={dataPostPlanning.dejeuner} onChange={handleDejeuner} checked={dataPostPlanning.dejeuner}/>
+                                </div>
+                            </Col>
+                            <Col>
+                                <div className={"btn-form"}>
+                                    <label htmlFor='gouter'>Gouter (15h - 17h) :</label>
+                                    <input type='checkbox' id='gouter' value={dataPostPlanning.gouter} onChange={handleGouter} checked={dataPostPlanning.gouter}/>
+                                </div>
+                                <div className={"btn-form"}>
+                                    <label htmlFor='repas'>Repas (18h - 22h) :</label>
+                                    <input type='checkbox' id='repas' value={dataPostPlanning.repas} onChange={handleRepas} checked={dataPostPlanning.repas}/>
+                                </div>
+                            </Col>
+                        </Row>
+                        <Button className={"button"} variant={"outline-light"} type='submit'>Valider</Button>
+                    </form>
+                </div>
+            </div>
         </div>
     )
 }

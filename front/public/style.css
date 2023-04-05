@@ -149,3 +149,84 @@
     border-radius: 200px;
     margin-right: 10px;
 }
+
+/* calendar */
+
+.planning-chef h1{
+    text-align: center;
+    padding: 15px 0;
+}
+
+.planning-content{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.planning-content-form{
+    background-color: rgb(126, 85, 70);
+    padding: 100px;
+    border-radius: 10px;
+}
+
+.planning-content-form .bold{
+    color: white;
+    font-size: 28pt;
+}
+
+.planning-content-form .row{
+    padding: 50px 0;
+}
+
+.planning-content-form form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.planning-content-form .btn-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 177, 142, 0.53);
+    padding: 15px;
+    width: 300px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.planning-content-form input[type="checkbox"]{
+    position: relative;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    -webkit-appearance: none;
+    outline: none;
+    transition: .5s;
+    margin-left: 10px;
+}
+
+.planning-content-form input[type="checkbox"]:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 4px solid rgb(126, 85, 70);
+    box-sizing: border-box;
+    transition: .5s;
+}
+
+.planning-content-form input:checked[type="checkbox"]:before{
+    border-left: none;
+    border-top: none;
+    width: 20px;
+    border-color: #0f0;
+    transform: rotate(45deg) translate(5px, -10px);
+}
+
+.planning-content-form label{
+    font-size: 14pt;
+}
