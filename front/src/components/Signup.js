@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
     const navigate = useNavigate();
-    const [dataSignup, setDataSignup] = useState({username: '', password: '', firstname: '', lastname: '', adresse: '', mail: '', photo: '', role: 'client', spec: ''});
+    const [dataSignup, setDataSignup] = useState({username: '', password: '', firstname: '', lastname: '', adresse: '', mail: '', photo: 'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Image.png', role: 'client', spec: ''});
 
     const handleName = (e) => {
         setDataSignup({...dataSignup, username: e.target.value});
