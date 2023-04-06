@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {Button} from "react-bootstrap";
 import {get_chefs_liste, get_reservation_client} from "../services/api";
 import moment from "moment";
 
@@ -8,6 +9,15 @@ const Home = (props) => {
     const [dataReservation, setDataReservation] = useState([]);
     const [searchName, setSearchName] = useState("");
     const [searchCity, setSearchCity] = useState("");
+    const [dataClient, setDataClient] = useState([]);
+
+    const clientListe = () =>{
+        if (props.cookies.BearerToken){
+            get_user(props.cookies.BearerToken.token).then((values) => {
+                setDataClient(values);
+            })
+        }
+    };
 
     const chefsListe = () => {
         if (props.cookies.BearerToken){
