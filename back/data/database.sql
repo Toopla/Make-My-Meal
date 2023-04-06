@@ -38,7 +38,7 @@ CREATE TABLE reservation (
 );
 
 INSERT INTO users (user_username, user_password, user_firstname, user_lastname, user_adresse, user_mail, user_photo, user_role, user_spec) VALUES 
-('alexis_grislin', '$2b$10$S4YwMLwSz4h.l1HCJjtZTuMbHkjjE3JXFNxoyrcQlg5m0sGwfyy0e', 'Alexis', 'Grislin', 'Biache-Saint-Vaast', 'alexis.grislin@outlook.fr', 'https://cdn.discordapp.com/attachments/768530729276669962/1093137302794010634/Topla-Square.png', 'client', ''),
-('tom_cuvelier', '$2b$10$S4YwMLwSz4h.l1HCJjtZTuMbHkjjE3JXFNxoyrcQlg5m0sGwfyy0e', 'Tom', 'Cuvelier', 'Liévin', 'cuvelier.tom62@gmail.com', 'https://cdn.discordapp.com/attachments/768530729276669962/1093134086958235738/IMG_0518.jpg', 'chef', 'Italien'),
-('guillaume_lisse', '$2b$10$S4YwMLwSz4h.l1HCJjtZTuMbHkjjE3JXFNxoyrcQlg5m0sGwfyy0e', 'Guillaume', 'Lisse', 'Hénin-Beaumont', 'lisseguillaume@gmail.com', 'https://cdn.discordapp.com/attachments/783594145850720256/1093137584139534386/DK.PNG', 'client', ''),
-('enzo_blois', '$2b$10$S4YwMLwSz4h.l1HCJjtZTuMbHkjjE3JXFNxoyrcQlg5m0sGwfyy0e', 'Enzo', 'Blois', 'Grenay', 'enzoblois4@gmail.com', 'https://cdn.discordapp.com/attachments/1030393104521498634/1093137481987276913/IMG_0095.jpg', 'chef', 'Indien');
+('alexis_grislin', '$2b$10$S4YwMLwSz4h.l1HCJjtZTuMbHkjjE3JXFNxoyrcQlg5m0sGwfyy0e', 'Alexis', 'Grislin', 'Biache-Saint-Vaast', 'alexis.grislin@outlook.fr', 'https://cdn.discordapp.com/attachments/768530729276669962/1093137302794010634/Topla-Square.png', 'chef', 'Canadiennes'),
+('tom_cuvelier', '$2b$10$S4YwMLwSz4h.l1HCJjtZTuMbHkjjE3JXFNxoyrcQlg5m0sGwfyy0e', 'Tom', 'Cuvelier', 'Liévin', 'cuvelier.tom62@gmail.com', 'https://cdn.discordapp.com/attachments/768530729276669962/1093134086958235738/IMG_0518.jpg', 'chef', 'Américaines'),
+('guillaume_lisse', '$2b$10$S4YwMLwSz4h.l1HCJjtZTuMbHkjjE3JXFNxoyrcQlg5m0sGwfyy0e', 'Guillaume', 'Lisse', 'Hénin-Beaumont', 'lisseguillaume@gmail.com', 'https://cdn.discordapp.com/attachments/783594145850720256/1093137584139534386/DK.PNG', 'chef', 'Françaises'),
+('enzo_blois', '$2b$10$S4YwMLwSz4h.l1HCJjtZTuMbHkjjE3JXFNxoyrcQlg5m0sGwfyy0e', 'Enzo', 'Blois', 'Grenay', 'enzoblois4@gmail.com', 'https://cdn.discordapp.com/attachments/1030393104521498634/1093137481987276913/IMG_0095.jpg', 'chef', 'Italiennes');
