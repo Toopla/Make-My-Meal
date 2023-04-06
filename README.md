@@ -36,23 +36,28 @@ Notre journée type durant cette semaine de projet était peu structurée. Nous 
 Enfin, nous avons utilisé un outil de suivi de projet en ligne pour faciliter la collaboration et la coordination entre les membres de l'équipe. Nous avons choisi GitHub pour sa fonctionnalité de suivi de projet intégrée, qui nous a permis de suivre nos progrès et de documenter nos travaux. Cela nous a également aidé à résoudre les conflits de version et à conserver une trace de toutes les modifications apportées au projet.
 
 ## Application
-| Fonctionnalité   | Fonctionne | Fonctionne partiellement |  Ne fonctionne pas   |  Non fait   | 
-|:-----------------|:----------:|:------------------------:|:---:|:---:|
-| Authentification |     X      |                          |     |     |
-| Tests back       |     X      |                          |     |     |
-| Tests front      |     X      |                          |     |     |
-| Réservation      |            |            X             |     |     |
-| Planning         |     X      |                          |     |     |
-| Modifier profil  |            |            X             |     |     |
-| Liste des chefs  |     X      |                          |     |     |
-| Style            |     X      |                          |     |     |
-| Cypress          |            |            X             |     |     |
+| Fonctionnalité        | Fonctionne | Fonctionne partiellement |  Ne fonctionne pas   |  Non fait   | 
+|:----------------------|:----------:|:------------------------:|:---:|:---:|
+| Authentification      |     X      |                          |     |     |
+| Tests back            |     X      |                          |     |     |
+| Tests front           |     X      |                          |     |     |
+| Réservation           |            |            X             |     |     |
+| Planning suppressions |     X      |                          |     |     |
+| Planning              |     X      |                          |     |     |
+| Modifier profil       |            |            X             |     |     |
+| Liste des chefs       |     X      |                          |     |     |
+| Style                 |     X      |                          |     |     |
+| Cypress               |            |            X             |     |     |
+| Profil                |            |            X             |     |     |
 
 ## Mise en place
 
-Dans le dossier front : npm run start
 
-Dans le dossier back : npm run start
+Dans le dossier front : npm install
+                        npm run start
+
+Dans le dossier back :  npm install
+                        npm run start
 
 ## Rétrospective
 
