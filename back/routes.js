@@ -12,9 +12,9 @@ routes.use(auth.initialize());
 routes.get('/users/:id', auth.authenticate(), (req, res) => {
     db.get('SELECT user_id AS id, user_username AS username, user_password AS password, user_firstname AS firstname, user_lastname AS lastname, user_adresse AS adresse, user_mail AS mail, user_photo AS photo, user_role AS role, user_spec AS spec FROM users WHERE user_id=$id', {$id: req.params.id}, (err, row) => {
         if (err){
-            return res.json(err).status(500);
+            return res.status(500).json(err);
         }else {
-            return res.json(row).status(200);
+            return res.status(200).json(row);
         }
     })
 })
@@ -22,9 +22,9 @@ routes.get('/users/:id', auth.authenticate(), (req, res) => {
 routes.get('/chefs/liste', auth.authenticate(), (req, res) => {
     db.all('SELECT user_id AS id, user_firstname AS firstname, user_lastname AS lastname, user_adresse AS adresse, user_mail AS mail, user_photo AS photo, user_role AS role, user_spec AS spec FROM users WHERE user_role="chef"', (err, rows) => {
         if(err) {
-            return res.json(err).status(500);
+            return res.status(500).json(err);
         } else {
-            return res.json(rows).status(200);
+            return res.status(200).json(rows);
         }
     })
 })
@@ -32,9 +32,9 @@ routes.get('/chefs/liste', auth.authenticate(), (req, res) => {
 routes.get('/reservation/:id', auth.authenticate(), (req, res) => {
     db.all('SELECT reserv_id AS id, reserv_id_client AS id_client, reserv_id_chef AS id_chef, reserv_name_chef AS name_chef, reserv_name_client AS name_client, reserv_adresse AS adresse, reserv_jour AS jour, reserv_creneau AS creneau, reserv_photo AS photo FROM reservation WHERE reserv_id_client=$id_client OR reserv_id_chef=$id_chef ORDER BY jour ASC', {$id_client: req.params.id, $id_chef: req.params.id}, (err, rows) => {
         if(err) {
-            return res.json(err).status(500);
+            return res.status(500).json(err);
         } else {
-            return res.json(rows).status(200);
+            return res.status(200).json(rows);
         }
     })
 })
@@ -51,7 +51,7 @@ routes.post('/reservation', auth.authenticate(), (req, res) => {
         $photo: req.body.photo
     }, (err) => {
         if(err) {
-            return res.json(err).status(500);
+            return res.status(500).json(err);
         } else {
             return res.status(200);
         }
@@ -64,7 +64,7 @@ routes.delete('/reservation/:id_client/:id', auth.authenticate(), (req, res) => 
         $id: req.params.id
     }, (err) => {
         if(err) {
-            return res.json(err).status(500);
+            return res.status(500).json(err);
         } else {
             return res.status(200);
         }
@@ -74,9 +74,9 @@ routes.delete('/reservation/:id_client/:id', auth.authenticate(), (req, res) => 
 routes.get('/planning/:id', auth.authenticate(), (req, res) => {
     db.all('SELECT plan_id AS id, plan_id_chef AS id_chef, plan_jour AS jour, plan_petit_dejeuner AS petit_dejeuner, plan_dejeuner AS dejeuner, plan_gouter AS gouter, plan_repas AS repas FROM planning WHERE plan_id_chef=$id_chef ORDER BY plan_jour ASC', {$id_chef: req.params.id}, (err, rows) => {
         if(err) {
-            return res.json(err).status(500);
+            return res.status(500).json(err);
         } else {
-            return res.json(rows).status(200);
+            return res.status(200).json(rows);
         }
     })
 })
@@ -91,7 +91,7 @@ routes.post('/planning', auth.authenticate(), (req, res) => {
         $repas: req.body.repas
     }, (err) => {
         if(err) {
-            return res.json(err).status(500);
+            return res.status(500).json(err);
         } else {
             return res.status(200);
         }
@@ -108,7 +108,7 @@ routes.put('/planning/:id_chef/:id', auth.authenticate(), (req, res) => {
         $id: req.params.id
     }, (err) => {
         if(err) {
-            return res.json(err).status(500);
+            return res.status(500).json(err);
         } else {
             return res.status(200);
         }
@@ -121,7 +121,7 @@ routes.delete('/planning/:id_chef/:id', auth.authenticate(), (req, res) => {
         $id: req.params.id
     }, (err) => {
         if(err) {
-            return res.json(err).status(500);
+            return res.status(500).json(err);
         } else {
             return res.status(200);
         }
@@ -142,9 +142,9 @@ routes.post('/signup', (req, res) => {
             $spec: req.body.spec
         }, (err, row) => {
             if(err) {
-                return res.json(err).status(500);
+                return res.status(500).json(err);
             } else {
-                return res.json({id: row.user_id}).status(200);
+                return res.status(200).json({id: row.user_id});
             }
         });
     })
@@ -155,11 +155,11 @@ routes.post('/login', (req, res) => {
         $username: req.body.username
     }, async (err, row) => {
         if(err) {
-            return res.json(err).status(500);
+            return res.status(500).json(err);
         }
 
         if(!row) {
-            return res.json("Le compte n'existe pas").status(400);
+            return res.status(400).json("Le compte n'existe pas");
         }
 
         const match = await bcrypt.compare(req.body.password, row.user_password);
@@ -167,9 +167,9 @@ routes.post('/login', (req, res) => {
             const id = row.user_id;
             const role = row.user_role;
             const token = jwt.sign({id: row.user_id}, cfg.jwtSecret, {expiresIn: '1H'});
-            return res.json({token: token, id: id, role: role}).status(200);
+            return res.status(200).json({token: token, id: id, role: role});
         } else {
-            res.json('Le mot de passe est incorrect').status(400);
+            res.status(400).json('Le mot de passe est incorrect');
         }
     })
 })
