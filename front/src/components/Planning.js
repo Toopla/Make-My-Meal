@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { get_planning, post_planning, put_planning } from "../services/api";
 import {Button, Col, Row} from 'react-bootstrap';
+import { delete_planning, get_planning_chef, post_planning, put_planning } from "../services/api";
 import moment from 'moment';
 import '../assets/styles/Calendar.css';
 
@@ -13,8 +13,16 @@ const Planning = (props) => {
     const id_utilisateur = props.cookies.BearerToken.id_utilisateur;
 
     const planning = () => {
-        get_planning(token, id_utilisateur).then((values) => {
+        get_planning_chef(token, id_utilisateur).then((values) => {
             setDataGetPlanning(values);
+            let currentDate = new Date();
+            let result = {jour: dataPostPlanning.jour, petit_dejeuner: dataPostPlanning.petit_dejeuner, dejeuner: dataPostPlanning.dejeuner, gouter: dataPostPlanning.gouter, repas: dataPostPlanning.repas};
+            for(let i = 0; i < values.length; i++) {
+                if(moment(currentDate).format('DD/MM/YYYY') === moment(values[i].jour).format('DD/MM/YYYY')) {
+                    result = {id: values[i].id, jour: values[i].jour, petit_dejeuner: values[i].petit_dejeuner, dejeuner: values[i].dejeuner, gouter: values[i].gouter, repas: values[i].repas};
+                }
+            }
+            setDataPostPlanning(result);
         })
     }
 
@@ -44,7 +52,7 @@ const Planning = (props) => {
         setDataPostPlanning({...dataPostPlanning, repas: e.target.checked});
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         let jour = dataPostPlanning.jour;
         let petit_dejeuner = dataPostPlanning.petit_dejeuner;
         let dejeuner = dataPostPlanning.dejeuner;
@@ -54,8 +62,14 @@ const Planning = (props) => {
             post_planning(token, id_utilisateur, jour, petit_dejeuner, dejeuner, gouter, repas).then((values) => {});
         } else {
             let id = dataPostPlanning.id;
-            put_planning(token, id_utilisateur, id, petit_dejeuner, dejeuner, gouter, repas).then((values) => {});
+            if((petit_dejeuner === false || petit_dejeuner === 0) && (dejeuner === false || dejeuner === 0) && (gouter === false || gouter === 0) && (repas === false || repas === 0)) {
+                delete_planning(token, id_utilisateur, id).then((values) => {});
+                setDataPostPlanning({jour: dataPostPlanning.jour, petit_dejeuner: false, dejeuner: false, gouter: false, repas: false});
+            } else {
+                put_planning(token, id_utilisateur, id, petit_dejeuner, dejeuner, gouter, repas).then((values) => {});
+            }
         }
+        alert('Planning du jour enregistré.');
         planning();
         e.preventDefault();
     }

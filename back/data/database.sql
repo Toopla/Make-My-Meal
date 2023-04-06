@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS planning;
+DROP TABLE IF EXISTS reservation;
 
 CREATE TABLE users (
     user_id INTEGER primary key autoincrement,
@@ -22,6 +23,18 @@ CREATE TABLE planning (
     plan_dejeuner BOOLEAN NOT NULL,
     plan_gouter BOOLEAN NOT NULL,
     plan_repas BOOLEAN NOT NULL
+);
+
+CREATE TABLE reservation (
+    reserv_id INTEGER primary key autoincrement,
+    reserv_id_client INTEGER NOT NULL,
+    reserv_id_chef INTEGER NOT NULL,
+    reserv_name_chef VARCHAR NOT NULL,
+    reserv_name_client VARCHAR NOT NULL,
+    reserv_adresse VARCHAR NOT NULL,
+    reserv_jour DATE NOT NULL,
+    reserv_creneau VARCHAR NOT NULL,
+    reserv_photo VARCHAR NOT NULL
 );
 
 INSERT INTO users (user_username, user_password, user_firstname, user_lastname, user_adresse, user_mail, user_photo, user_role, user_spec) VALUES 
