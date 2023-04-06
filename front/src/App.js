@@ -19,7 +19,7 @@ const App = () => {
                 <Route exact={true} path='/' element={<Home cookies={cookies}/>}></Route>
             </Routes>
             <Routes>
-                <Route exact={true} path='/reservation' element={<Reservation/>}></Route>
+                <Route exact={true} path='/reservation' element={<Reservation cookies={cookies}/>}></Route>
             </Routes>
             <Routes>
                 <Route exact={true} path='/planning' element={<Planning cookies={cookies}/>}></Route>
