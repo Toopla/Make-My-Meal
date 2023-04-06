@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Button} from "react-bootstrap";
-import {get_chefs_liste, get_reservation_client} from "../services/api";
+import {get_chefs_liste, get_reservation_client, get_user} from "../services/api";
 import moment from "moment";
 
 const Home = (props) => {
@@ -131,7 +131,7 @@ const Home = (props) => {
                                             {prop.mail}
                                         </td>
                                         <td>
-                                            Chef {prop.spec}
+                                            {prop.spec}
                                         </td>
                                     </tr>
     
