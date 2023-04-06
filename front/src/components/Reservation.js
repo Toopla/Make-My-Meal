@@ -86,15 +86,17 @@ const Reservation = (props) => {
     }, [])
 
     return (
-        <div style={{marginLeft: 50, marginTop: 20}}>
-            <label htmlFor='chefs'>Liste des chefs :</label><br/>
-            <select id='chefs' value={dataGetChefs.id} onChange={handleChef} required>
-                {dataGetChefs.map((prop, key) => {
-                    return (
-                        <option key={key} value={prop.id}>{prop.firstname + ' ' + prop.lastname}</option>
-                    )
-                })}
-            </select>
+        <div className={"reservation-container"}>
+            <div className={"flex-chefs"}>
+                <label htmlFor='chefs'>Liste des chefs :</label><br/>
+                <select id='chefs' value={dataGetChefs.id} onChange={handleChef} required>
+                    {dataGetChefs.map((prop, key) => {
+                        return (
+                            <option key={key} value={prop.id}>{prop.firstname + ' ' + prop.lastname}</option>
+                        )
+                    })}
+                </select>
+            </div>
             <div className='planning'>
                 {dataGetPlanning.map((prop, key) => {
                     return (
@@ -102,29 +104,29 @@ const Reservation = (props) => {
                             {prop.petit_dejeuner === 1 &&
                                 <div className='planningForPetitDejeuner'>
                                     Date: {moment(prop.jour).format('DD/MM/YYYY')} 
-                                    Créneau: Petit Déjeuner (7h - 10h) 
-                                    <Button variant={"outline-light"} onClick={() => reservationPetitDejeuner(prop.jour, 'petit_dejeuner')}>Réserver</Button>
+                                    &nbsp;Créneau: Petit Déjeuner (7h - 10h)
+                                    <Button className={"button-reservation"} variant={"outline-light"} onClick={() => reservationPetitDejeuner(prop.jour, 'petit_dejeuner')}>Réserver</Button>
                                 </div>
                             }
                             {prop.dejeuner === 1 &&
                                 <div className='planningForDejeuner'>
                                     Date: {moment(prop.jour).format('DD/MM/YYYY')}
-                                    Créneau: Déjeuner (11h - 14h) 
-                                    <Button variant={"outline-light"} onClick={() => reservationDejeuner(prop.jour, 'dejeuner')}>Réserver</Button>
+                                    &nbsp;Créneau: Déjeuner (11h - 14h)
+                                    <Button className={"button-reservation"} variant={"outline-light"} onClick={() => reservationDejeuner(prop.jour, 'dejeuner')}>Réserver</Button>
                                 </div>
                             }
                             {prop.gouter === 1 &&
                                 <div className='planningForGouter'>
-                                    Date: {moment(prop.jour).format('DD/MM/YYYY')} 
-                                    Créneau: Goûter (15h - 17h) 
-                                    <Button variant={"outline-light"} onClick={() => reservationGouter(prop.jour, 'gouter')}>Réserver</Button>
+                                    Date: {moment(prop.jour).format('DD/MM/YYYY')}
+                                    &nbsp;Créneau: Goûter (15h - 17h)
+                                    <Button className={"button-reservation"} variant={"outline-light"} onClick={() => reservationGouter(prop.jour, 'gouter')}>Réserver</Button>
                                 </div>
                             }
                             {prop.repas === 1 &&
                                 <div className='planningForRepas'>
-                                    Date: {moment(prop.jour).format('DD/MM/YYYY')} 
-                                    Créneau: Repas (18h - 22h) 
-                                    <Button variant={"outline-light"} onClick={() => reservationRepas(prop.jour, 'repas')}>Réserver</Button>
+                                    Date: {moment(prop.jour).format('DD/MM/YYYY')}
+                                    &nbsp;Créneau: Repas (18h - 22h)
+                                    <Button className={"button-reservation"} variant={"outline-light"} onClick={() => reservationRepas(prop.jour, 'repas')}>Réserver</Button>
                                 </div>
                             }
                         </div>
@@ -138,8 +140,8 @@ const Reservation = (props) => {
                         <div key={key} className='reservationForCreneau'>
                             Chef: {prop.name_chef}
                             Date: {moment(prop.jour).format('DD/MM/YYYY')}
-                            Créneau: {prop.creneau === 'petit_dejeuner' ? 'Petit déjeuner (7h - 10h)' : prop.creneau === 'dejeuner' ? 'Déjeuner (11h - 14h)' : prop.creneau === 'gouter' ? 'Goûter (15h - 17h)' : 'Repas (18h - 22h)'}
-                            <Button variant={"outline-light"} onClick={() => deleteReservation(prop.id)}>Supprimer</Button>
+                            &nbsp;Créneau: {prop.creneau === 'petit_dejeuner' ? 'Petit déjeuner (7h - 10h)' : prop.creneau === 'dejeuner' ? 'Déjeuner (11h - 14h)' : prop.creneau === 'gouter' ? 'Goûter (15h - 17h)' : 'Repas (18h - 22h)'}
+                            <Button className={"button-reservation"} variant={"outline-light"} onClick={() => deleteReservation(prop.id)}>Supprimer</Button>
                         </div>
                     )
                 })}

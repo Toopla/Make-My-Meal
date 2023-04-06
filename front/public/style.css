@@ -232,3 +232,47 @@
 .planning-content-form label{
     font-size: 14pt;
 }
+
+/*reservation*/
+
+.reservation-container{
+    background-color: rgb(126, 85, 70);
+    border-radius: 10px;
+    padding: 20px;
+    width: 50%;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.reservation-container label{
+    color: white;
+    font-size: 24pt;
+    text-align: center;
+}
+
+.planningForOneDay,
+.reservationForCreneau{
+    color: white;
+}
+
+.button-reservation{
+    margin-left: 10px;
+}
+
+.reservation-container select{
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 100px;
+    color: white;
+    background-color: #d2b696;
+    font-size: 14pt;
+    padding: 10px 20px;
+}
+
+.flex-chefs{
+    display: flex;
+}
+
+.flex-chefs label{
+    margin-right: 20px;
+}
